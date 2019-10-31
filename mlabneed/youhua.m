@@ -1,0 +1,13 @@
+data1 = cell2mat(struct2cell(load('C:\Users\BC\Desktop\mlabneed\data.mat')));
+A=[];%线性不等约束无
+Aeq=[];%线性等式约束无
+b=[];
+beq=[];
+lb=[0;0;0;0;0];
+ub=[inf;inf;inf;inf;inf];
+x0=[0;0;0;0;0];
+options = optimoptions('fmincon','Display','iter','Algorithm','active-set');
+[x,fval,exitflag,output]=fmincon(@fun,x0,A,b,Aeq,beq,lb,ub,@nline,options);
+e1 = abs(x(1) - 13429192.905794399);
+e2 = abs(x(2) - 3667622.4165671333);
+ed = (e1^2 + e2^2)^0.5
